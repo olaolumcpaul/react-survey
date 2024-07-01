@@ -1,28 +1,29 @@
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
+// A set of predefined answers for time spent with the rubber duck
 const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
   chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
+  noTime: "I don't like to spend time with it",
 };
 
+// Component to render the list of time spent items
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, index) => (
+        <li key={index}>{answersSet[item]}</li>
       ))}
     </ul>
   );
 }
 
-// This is the main component being exported from this file
+// Main component to render each answer item
 export default function AnswersItem({
-  // Feel free to change this props names to what suits you best
-  // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, colour, timeSpent, review },
+  onEdit,
 }) {
   return (
     <li>
@@ -40,6 +41,7 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button onClick={onEdit}>Edit</button>
       </article>
     </li>
   );
